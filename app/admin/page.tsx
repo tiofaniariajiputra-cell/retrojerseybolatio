@@ -1,4 +1,42 @@
 import { prisma } from '@/backend/utils/prisma'
+import net from 'net'
+
+async function isDbReachable(databaseUrl?: string, timeout = 1000) {
+  if (!databaseUrl) return false
+  try {
+    const url = new URL(databaseUrl)
+    const host = url.hostname
+    const port = Number(url.port) || 5432
+
+    return await new Promise((resolve) => {
+      const socket = new net.Socket()
+      let settled = false
+      socket.setTimeout(timeout)
+      socket.on('connect', () => {
+        settled = true
+        socket.destroy()
+        resolve(true)
+      })
+      socket.on('timeout', () => {
+        if (!settled) {
+          settled = true
+          socket.destroy()
+          resolve(false)
+        }
+      })
+      socket.on('error', () => {
+        if (!settled) {
+          settled = true
+          socket.destroy()
+          resolve(false)
+        }
+      })
+      socket.connect(port, host)
+    })
+  } catch (e) {
+    return false
+  }
+}
 
 export default async function AdminDashboard() {
   // Get statistics with graceful handling when the DB is unreachable
@@ -8,76 +46,87 @@ export default async function AdminDashboard() {
   let recentProducts: any[] = []
   let totalStock = 0
 
-  try {
-    ;[
-      totalProducts,
-      totalCategories,
-      lowStockProducts,
-      recentProducts,
-    ] = await Promise.all([
-      prisma.product.count(),
-      prisma.category.count(),
-      prisma.product.findMany({
-        where: {
-          stock: {
-            lt: 10,
+  const reachable = await isDbReachable(process.env.DATABASE_URL)
+  if (reachable) {
+    try {
+      ;[
+        totalProducts,
+        totalCategories,
+        lowStockProducts,
+        recentProducts,
+      ] = await Promise.all([
+        prisma.product.count(),
+        prisma.category.count(),
+        prisma.product.findMany({
+          where: {
+            stock: {
+              lt: 10,
+            },
           },
-        },
-        include: {
-          category: true,
-          sizes: true,
-        },
-        take: 5,
-      }),
-      prisma.product.findMany({
-        include: {
-          category: true,
-          images: {
-            where: { isPrimary: true },
-            take: 1,
+          include: {
+            category: true,
+            sizes: true,
           },
-        },
-        orderBy: { createdAt: 'desc' },
-        take: 5,
-      }),
-    ])
+          take: 5,
+        }),
+        prisma.product.findMany({
+          include: {
+            category: true,
+            images: {
+              where: { isPrimary: true },
+              take: 1,
+            },
+          },
+          orderBy: { createdAt: 'desc' },
+          take: 5,
+        }),
+      ])
 
-    const allProducts = await prisma.product.findMany({
-      include: { sizes: true },
-    })
-    totalStock = allProducts.reduce((sum: number, product: any) => {
-      return sum + product.sizes.reduce((pSum: number, size: any) => pSum + size.stock, 0)
-    }, 0)
-  } catch (err) {
-    // Log the error but do not crash the page — show empty/default stats instead
+      const allProducts = await prisma.product.findMany({
+        include: { sizes: true },
+      })
+      totalStock = allProducts.reduce((sum: number, product: any) => {
+        return sum + product.sizes.reduce((pSum: number, size: any) => pSum + size.stock, 0)
+      }, 0)
+    } catch (err) {
+      // Log the error but do not crash the page — show empty/default stats instead
+      // eslint-disable-next-line no-console
+      console.error('AdminDashboard DB error:', err)
+      totalProducts = 0
+      totalCategories = 0
+      lowStockProducts = []
+      recentProducts = []
+      totalStock = 0
+    }
+  } else {
+    // DB not reachable — skip queries and use defaults
     // eslint-disable-next-line no-console
-    console.error('AdminDashboard DB error:', err)
-    totalProducts = 0
-    totalCategories = 0
-    lowStockProducts = []
-    recentProducts = []
-    totalStock = 0
+    console.warn('Database not reachable, skipping Prisma queries for admin dashboard')
   }
 
   const stats = [
     {
       title: 'Total Produk',
       value: totalProducts,
+      icon: '📦',
       color: 'bg-blue-500',
     },
     {
       title: 'Total Kategori',
       value: totalCategories,
+      icon: '🏷️',
       color: 'bg-green-500',
     },
     {
       title: 'Total Stok',
       value: totalStock,
+      icon: '📊',
       color: 'bg-purple-500',
     },
     {
       title: 'Stok Rendah',
       value: lowStockProducts.length,
+      icon: '⚠️',
       color: 'bg-red-500',
     },
   ]
@@ -98,7 +147,9 @@ export default async function AdminDashboard() {
                 <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
                 <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
               </div>
-              <div className={`${stat.color} w-12 h-12 rounded-full`} />
+              <div className={`${stat.color} w-12 h-12 rounded-full flex items-center justify-center text-2xl`}>
+                {stat.icon}
+              </div>
             </div>
           </div>
         ))}
