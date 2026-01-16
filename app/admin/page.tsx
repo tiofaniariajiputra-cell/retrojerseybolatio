@@ -1,49 +1,67 @@
 import { prisma } from '@/backend/utils/prisma'
 
 export default async function AdminDashboard() {
-  // Get statistics
-  const [
-    totalProducts,
-    totalCategories,
-    lowStockProducts,
-    recentProducts,
-  ] = await Promise.all([
-    prisma.product.count(),
-    prisma.category.count(),
-    prisma.product.findMany({
-      where: {
-        stock: {
-          lt: 10,
+  // Get statistics with safe fallbacks if the DB is unreachable
+  let totalProducts = 0
+  let totalCategories = 0
+  let lowStockProducts: any[] = []
+  let recentProducts: any[] = []
+  let totalStock = 0
+
+  try {
+    ;[
+      totalProducts,
+      totalCategories,
+      lowStockProducts,
+      recentProducts,
+    ] = await Promise.all([
+      prisma.product.count(),
+      prisma.category.count(),
+      prisma.product.findMany({
+        where: {
+          stock: {
+            lt: 10,
+          },
         },
-      },
+        include: {
+          category: true,
+          sizes: true,
+        },
+        take: 5,
+      }),
+      prisma.product.findMany({
+        include: {
+          category: true,
+          images: {
+            where: { isPrimary: true },
+            take: 1,
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+        take: 5,
+      }),
+    ])
+
+    // Calculate total stock
+    const allProducts = await prisma.product.findMany({
       include: {
-        category: true,
         sizes: true,
       },
-      take: 5,
-    }),
-    prisma.product.findMany({
-      include: {
-        category: true,
-        images: {
-          where: { isPrimary: true },
-          take: 1,
-        },
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 5,
-    }),
-  ])
-
-  // Calculate total stock
-  const allProducts = await prisma.product.findMany({
-    include: {
-      sizes: true,
-    },
-  })
-  const totalStock = allProducts.reduce((sum: number, product: any) => {
-    return sum + product.sizes.reduce((pSum: number, size: any) => pSum + size.stock, 0)
-  }, 0)
+    })
+    totalStock = allProducts.reduce((sum: number, product: any) => {
+      return sum + product.sizes.reduce((pSum: number, size: any) => pSum + size.stock, 0)
+    }, 0)
+  } catch (err) {
+    // Log and fall back to defaults so the admin page still renders
+    // (useful when the database is unreachable during local development)
+    // eslint-disable-next-line no-console
+    console.error('Get admin stats error:', err)
+    totalProducts = 0
+    totalCategories = 0
+    lowStockProducts = []
+    recentProducts = []
+    totalStock = 0
+  }
 
   const stats = [
     {
