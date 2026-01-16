@@ -10,17 +10,14 @@ export default function AdminSidebar() {
     {
       title: 'Dashboard',
       href: '/admin',
-      icon: '📊',
     },
     {
       title: 'Kelola Produk',
       href: '/admin/products',
-      icon: '⚽',
     },
     {
       title: 'Kategori',
       href: '/admin/categories',
-      icon: '🏷️',
     },
   ]
 

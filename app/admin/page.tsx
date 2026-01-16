@@ -1,7 +1,7 @@
 import { prisma } from '@/backend/utils/prisma'
 
 export default async function AdminDashboard() {
-  // Get statistics with safe fallbacks if the DB is unreachable
+  // Get statistics with graceful handling when the DB is unreachable
   let totalProducts = 0
   let totalCategories = 0
   let lowStockProducts: any[] = []
@@ -42,20 +42,16 @@ export default async function AdminDashboard() {
       }),
     ])
 
-    // Calculate total stock
     const allProducts = await prisma.product.findMany({
-      include: {
-        sizes: true,
-      },
+      include: { sizes: true },
     })
     totalStock = allProducts.reduce((sum: number, product: any) => {
       return sum + product.sizes.reduce((pSum: number, size: any) => pSum + size.stock, 0)
     }, 0)
   } catch (err) {
-    // Log and fall back to defaults so the admin page still renders
-    // (useful when the database is unreachable during local development)
+    // Log the error but do not crash the page — show empty/default stats instead
     // eslint-disable-next-line no-console
-    console.error('Get admin stats error:', err)
+    console.error('AdminDashboard DB error:', err)
     totalProducts = 0
     totalCategories = 0
     lowStockProducts = []
@@ -67,25 +63,21 @@ export default async function AdminDashboard() {
     {
       title: 'Total Produk',
       value: totalProducts,
-      icon: '📦',
       color: 'bg-blue-500',
     },
     {
       title: 'Total Kategori',
       value: totalCategories,
-      icon: '🏷️',
       color: 'bg-green-500',
     },
     {
       title: 'Total Stok',
       value: totalStock,
-      icon: '📊',
       color: 'bg-purple-500',
     },
     {
       title: 'Stok Rendah',
       value: lowStockProducts.length,
-      icon: '⚠️',
       color: 'bg-red-500',
     },
   ]
@@ -106,9 +98,7 @@ export default async function AdminDashboard() {
                 <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
                 <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
               </div>
-              <div className={`${stat.color} w-12 h-12 rounded-full flex items-center justify-center text-2xl`}>
-                {stat.icon}
-              </div>
+              <div className={`${stat.color} w-12 h-12 rounded-full`} />
             </div>
           </div>
         ))}
@@ -117,10 +107,7 @@ export default async function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Low Stock Products */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span>⚠️</span>
-            <span>Produk Stok Rendah</span>
-          </h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Produk Stok Rendah</h2>
           {lowStockProducts.length === 0 ? (
             <p className="text-gray-500 text-center py-8">Tidak ada produk dengan stok rendah</p>
           ) : (
@@ -146,10 +133,7 @@ export default async function AdminDashboard() {
 
         {/* Recent Products */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span>📦</span>
-            <span>Produk Terbaru</span>
-          </h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Produk Terbaru</h2>
           {recentProducts.length === 0 ? (
             <p className="text-gray-500 text-center py-8">Belum ada produk</p>
           ) : (
@@ -180,19 +164,19 @@ export default async function AdminDashboard() {
             href="/admin/products/new"
             className="bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition text-center font-semibold"
           >
-            ➕ Tambah Produk Baru
+            Tambah Produk Baru
           </a>
           <a
             href="/admin/products"
             className="bg-gray-600 text-white px-6 py-4 rounded-lg hover:bg-gray-700 transition text-center font-semibold"
           >
-            📝 Kelola Produk
+            Kelola Produk
           </a>
           <a
             href="/products"
             className="bg-green-600 text-white px-6 py-4 rounded-lg hover:bg-green-700 transition text-center font-semibold"
           >
-            👁️ Lihat Katalog
+            Lihat Katalog
           </a>
         </div>
       </div>
