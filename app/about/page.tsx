@@ -12,7 +12,6 @@ export default function AboutPage() {
           {/* About Us */}
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span>ℹ️</span>
               <span>Tentang Kami</span>
             </h2>
             <div className="space-y-4 text-gray-600">
@@ -34,12 +33,10 @@ export default function AboutPage() {
           {/* Contact Info */}
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span>📞</span>
               <span>Informasi Kontak</span>
             </h2>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <span className="text-2xl">📍</span>
                 <div>
                   <p className="font-semibold text-gray-900">Alamat</p>
                   <p className="text-gray-600">Jakarta, Indonesia</p>
@@ -47,7 +44,6 @@ export default function AboutPage() {
               </div>
 
               <div className="flex items-start gap-3">
-                <span className="text-2xl">⏰</span>
                 <div>
                   <p className="font-semibold text-gray-900">Jam Operasional</p>
                   <p className="text-gray-600">Senin - Sabtu: 09:00 - 21:00</p>
@@ -56,7 +52,6 @@ export default function AboutPage() {
               </div>
 
               <div className="flex items-start gap-3">
-                <span className="text-2xl">📧</span>
                 <div>
                   <p className="font-semibold text-gray-900">Email</p>
                   <p className="text-gray-600">info@jerseyretro.com</p>
@@ -64,16 +59,14 @@ export default function AboutPage() {
               </div>
 
               <div className="flex items-start gap-3">
-                <span className="text-2xl">💬</span>
                 <div>
                   <p className="font-semibold text-gray-900 mb-2">WhatsApp</p>
                   <a
                     href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+                    className="inline-flex bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
                   >
-                    <span>💬</span>
                     <span>Chat WhatsApp</span>
                   </a>
                 </div>
@@ -89,7 +82,6 @@ export default function AboutPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="text-4xl mb-3">✨</div>
               <h3 className="font-semibold text-gray-900 mb-2">Kualitas Original</h3>
               <p className="text-gray-600 text-sm">
                 Jersey retro berkualitas premium dengan detail autentik dan bahan terbaik
@@ -97,7 +89,6 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center">
-              <div className="text-4xl mb-3">📦</div>
               <h3 className="font-semibold text-gray-900 mb-2">Pengiriman Cepat</h3>
               <p className="text-gray-600 text-sm">
                 Pengiriman ke seluruh Indonesia dengan packing aman dan rapi
@@ -105,7 +96,6 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center">
-              <div className="text-4xl mb-3">💯</div>
               <h3 className="font-semibold text-gray-900 mb-2">Harga Terjangkau</h3>
               <p className="text-gray-600 text-sm">
                 Harga kompetitif dengan kualitas terjamin untuk semua kalangan
