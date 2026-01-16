@@ -36,7 +36,6 @@ export default function MoreInfoPage() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl flex-shrink-0">
-                    ✨
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg mb-2">Kualitas Premium</h3>
@@ -47,7 +46,6 @@ export default function MoreInfoPage() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl flex-shrink-0">
-                    🎯
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg mb-2">Desain Autentik</h3>
@@ -58,7 +56,6 @@ export default function MoreInfoPage() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl flex-shrink-0">
-                    💯
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg mb-2">Pelayanan Terbaik</h3>
@@ -81,7 +78,7 @@ export default function MoreInfoPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition">
-              <div className="text-5xl mb-4">📦</div>
+              <div className="text-5xl mb-4"></div>
               <h3 className="text-xl font-bold mb-3 text-gray-900">Pengiriman Aman</h3>
               <p className="text-gray-600 leading-relaxed">
                 Jersey dikemas dengan bubble wrap dan box khusus untuk memastikan kondisi sempurna saat sampai ke tangan Anda
@@ -102,7 +99,7 @@ export default function MoreInfoPage() {
               </p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition">
-              <div className="text-5xl mb-4">🚚</div>
+              <div className="text-5xl mb-4"></div>
               <h3 className="text-xl font-bold mb-3 text-gray-900">Pengiriman Cepat</h3>
               <p className="text-gray-600 leading-relaxed">
                 Bekerjasama dengan ekspedisi terpercaya untuk pengiriman ke seluruh Indonesia dalam 2-5 hari kerja
@@ -169,21 +166,18 @@ export default function MoreInfoPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white p-8 rounded-xl shadow-md text-center">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">📍</span>
               </div>
               <h3 className="font-bold text-gray-900 mb-2 text-lg">Lokasi</h3>
               <p className="text-gray-600">Jakarta, Indonesia</p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-md text-center">
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">💬</span>
               </div>
               <h3 className="font-bold text-gray-900 mb-2 text-lg">WhatsApp</h3>
               <p className="text-gray-600">Order via WhatsApp untuk respon cepat</p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-md text-center">
               <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">🕒</span>
               </div>
               <h3 className="font-bold text-gray-900 mb-2 text-lg">Jam Operasional</h3>
               <p className="text-gray-600">Senin - Sabtu<br/>09:00 - 21:00 WIB</p>
