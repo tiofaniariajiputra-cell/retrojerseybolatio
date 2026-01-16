@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model (untuk tracking created/updated by admin)
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  role      String    @default("user") // user atau admin
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  // Relations
+  products  Product[] @relation("ProductCreator")
+}
+
+// Category untuk jersey (Home, Away, Third, etc)
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique // Home, Away, Third, Special Edition
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  // Relations
+  products  Product[]
+}
+
+// Main Product model untuk jersey
+model Product {
+  id          String    @id @default(cuid())
+  name        String    // Manchester United 1999 Retro Home
+  slug        String    @unique
+  club        String    // Manchester United
+  season      String    // 1999-2000
+  description String?   @db.Text
+  price       Decimal   @db.Decimal(10, 2)
+  stock       Int       @default(0)
+  isAvailable Boolean   @default(true)
+  
+  // Category relation
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  // Creator relation
+  createdById String?
+  createdBy   User?     @relation("ProductCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  
+  // Timestamps
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations
+  images      ProductImage[]
+  sizes       ProductSize[]
+  
+  @@index([categoryId])
+  @@index([club])
+  @@index([createdById])
+}
+
+// Product Images (multiple images per product)
+model ProductImage {
+  id        String   @id @default(cuid())
+  url       String
+  alt       String?
+  isPrimary Boolean  @default(false)
+  order     Int      @default(0)
+  
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@index([productId])
+}
+
+// Product Sizes dengan stock per size
+model ProductSize {
+  id        String   @id @default(cuid())
+  size      String   // S, M, L, XL, XXL
+  stock     Int      @default(0)
+  
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([productId, size])
+  @@index([productId])
+}
+
+
