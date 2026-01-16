@@ -27,6 +27,7 @@ export default async function AdminProductsPage() {
           href="/admin/products/new"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold flex items-center gap-2"
         >
+          <span>➕</span>
           <span>Tambah Produk</span>
         </Link>
       </div>
@@ -85,8 +86,8 @@ export default async function AdminProductsPage() {
                                 className="object-cover"
                               />
                             ) : (
-                              <div className="flex items-center justify-center h-full text-gray-400">
-                                {/* no icon */}
+                              <div className="flex items-center justify-center h-full text-gray-400 text-2xl">
+                                ⚽
                               </div>
                             )}
                           </div>
@@ -133,14 +134,14 @@ export default async function AdminProductsPage() {
                             className="text-blue-600 hover:text-blue-900"
                             title="Lihat"
                           >
-                            Lihat
+                            👁️
                           </Link>
                           <Link
                             href={`/admin/products/${product.id}/edit`}
                             className="text-green-600 hover:text-green-900"
                             title="Edit"
                           >
-                            Edit
+                            ✏️
                           </Link>
                           <DeleteProductButton 
                             productId={product.id} 
