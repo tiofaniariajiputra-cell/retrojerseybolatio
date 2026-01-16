@@ -123,17 +123,17 @@ export default function Home() {
               <p className="text-gray-600 mb-4">
                 "Jersey yang diterima sesuai ekspektasi! Kualitas bagus dan pengiriman cepat. Sangat puas!"
               </p>
-              <p className="font-semibold text-gray-900">- Budi S.</p>
+              <p className="font-semibold text-gray-900">- Budi</p>
               <p className="text-sm text-gray-500">Jakarta</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
                 </div>
               <p className="text-gray-600 mb-4">
-                "Koleksi jersey retro terlengkap! Admin responsif dan membantu. Highly recommended!"
+                "Koleksi jersey retro bola terlengkap! Admin responsif dan membantu. recommended!"
               </p>
-              <p className="font-semibold text-gray-900">- Andi P.</p>
-              <p className="text-sm text-gray-500">Bandung</p>
+              <p className="font-semibold text-gray-900">- Andi.</p>
+              <p className="text-sm text-gray-500">Lampung</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
@@ -141,7 +141,7 @@ export default function Home() {
               <p className="text-gray-600 mb-4">
                 "Harga terjangkau dengan kualitas premium. Packing rapi dan aman. Terima kasih!"
               </p>
-              <p className="font-semibold text-gray-900">- Rini M.</p>
+              <p className="font-semibold text-gray-900">- Rini</p>
               <p className="text-sm text-gray-500">Surabaya</p>
             </div>
           </div>
