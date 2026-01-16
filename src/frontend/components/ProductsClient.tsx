@@ -87,7 +87,6 @@ export default function ProductsClient() {
           <div className="text-center py-20 bg-white rounded-2xl shadow-sm">Loading...</div>
         ) : products.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-2xl shadow-sm">
-            <div className="text-6xl mb-4">⚽</div>
             <p className="text-gray-500 text-lg mb-6">Belum ada produk tersedia.</p>
           </div>
         ) : (
@@ -106,7 +105,7 @@ export default function ProductsClient() {
                     {primaryImage ? (
                       <Image src={primaryImage.url} alt={primaryImage.alt || product.name} fill className="object-cover group-hover:scale-110 transition duration-500" />
                     ) : (
-                      <div className="flex items-center justify-center h-full text-gray-300 text-6xl">⚽</div>
+                      <div className="flex items-center justify-center h-full text-gray-300"></div>
                     )}
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -126,9 +125,9 @@ export default function ProductsClient() {
                     <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition min-h-[3.5rem]">{product.name}</h3>
 
                     <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-                      <span className="flex items-center gap-1"><span className="text-blue-600">⚽</span><span className="font-medium">{product.club}</span></span>
+                      <span className="font-medium">{product.club}</span>
                       <span className="text-gray-400">•</span>
-                      <span className="flex items-center gap-1"><span className="text-blue-600">📅</span><span>{product.season}</span></span>
+                      <span>{product.season}</span>
                     </div>
 
                     <div className="flex items-end justify-between mb-4 pb-4 border-b border-gray-100">
