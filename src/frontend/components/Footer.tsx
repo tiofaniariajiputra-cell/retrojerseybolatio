@@ -38,7 +38,7 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4">Informasi</h3>
             <ul className="space-y-2 text-sm">
               <li className="text-gray-400">
-                📍 Jakarta, Indonesia
+                Lampung, Indonesia
               </li>
               <li className="text-gray-400">
                 ⏰ Senin - Sabtu: 09:00 - 21:00
@@ -59,9 +59,8 @@ export default function Footer() {
               href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition text-sm"
+              className="inline-flex bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition text-sm"
             >
-              <span>💬</span>
               <span>Chat WhatsApp</span>
             </a>
           </div>
