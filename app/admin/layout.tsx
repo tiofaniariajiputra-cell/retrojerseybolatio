@@ -39,17 +39,14 @@ export default function AdminLayout({
     {
       title: 'Dashboard',
       href: '/admin',
-      icon: '📊',
     },
     {
       title: 'Kelola Produk',
       href: '/admin/products',
-      icon: '⚽',
     },
     {
       title: 'Kategori',
       href: '/admin/categories',
-      icon: '🏷️',
     },
   ]
 
@@ -78,7 +75,6 @@ export default function AdminLayout({
                       : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
-                  <span className="text-xl">{item.icon}</span>
                   <span>{item.title}</span>
                 </Link>
               )
