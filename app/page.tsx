@@ -24,9 +24,8 @@ export default function Home() {
                 href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx'}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center gap-2"
+                className="bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center"
               >
-                <span>💬</span>
                 <span>Order via WhatsApp</span>
               </a>
             </div>
@@ -42,21 +41,18 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">✨</div>
               <h3 className="text-xl font-semibold mb-2">Kualitas Original</h3>
               <p className="text-gray-600">
                 Jersey retro berkualitas premium dengan detail autentik
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">📦</div>
               <h3 className="text-xl font-semibold mb-2">Pengiriman Cepat</h3>
               <p className="text-gray-600">
                 Pengiriman ke seluruh Indonesia dengan packing aman
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">💯</div>
               <h3 className="text-xl font-semibold mb-2">Harga Terjangkau</h3>
               <p className="text-gray-600">
                 Harga kompetitif dengan kualitas terjamin
@@ -87,7 +83,6 @@ export default function Home() {
                 key={club}
                 className="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition cursor-pointer"
               >
-                <div className="text-3xl mb-2">⚽</div>
                 <p className="font-semibold text-gray-800">{club}</p>
               </div>
             ))}
@@ -108,9 +103,8 @@ export default function Home() {
             href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx'}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition text-lg"
+            className="inline-flex bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition text-lg"
           >
-            <span>💬</span>
             <span>Chat Sekarang</span>
           </a>
         </div>
@@ -124,9 +118,8 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
-                <div className="text-yellow-400 text-xl">⭐⭐⭐⭐⭐</div>
-              </div>
+                <div className="flex items-center mb-4">
+                </div>
               <p className="text-gray-600 mb-4">
                 "Jersey yang diterima sesuai ekspektasi! Kualitas bagus dan pengiriman cepat. Sangat puas!"
               </p>
@@ -134,9 +127,8 @@ export default function Home() {
               <p className="text-sm text-gray-500">Jakarta</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
-                <div className="text-yellow-400 text-xl">⭐⭐⭐⭐⭐</div>
-              </div>
+                <div className="flex items-center mb-4">
+                </div>
               <p className="text-gray-600 mb-4">
                 "Koleksi jersey retro terlengkap! Admin responsif dan membantu. Highly recommended!"
               </p>
@@ -144,9 +136,8 @@ export default function Home() {
               <p className="text-sm text-gray-500">Bandung</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
-                <div className="text-yellow-400 text-xl">⭐⭐⭐⭐⭐</div>
-              </div>
+                <div className="flex items-center mb-4">
+                </div>
               <p className="text-gray-600 mb-4">
                 "Harga terjangkau dengan kualitas premium. Packing rapi dan aman. Terima kasih!"
               </p>
