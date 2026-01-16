@@ -46,7 +46,6 @@ export default function AdminSidebar() {
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`}
             >
-              <span className="text-xl">{item.icon}</span>
               <span>{item.title}</span>
             </Link>
           )
