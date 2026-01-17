@@ -108,3 +108,5 @@ export default async function AdminCategoriesPage() {
     </div>
   )
 }
+
+// recovery: page fix #9
