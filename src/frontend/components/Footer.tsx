@@ -1,4 +1,7 @@
+import { getWaNumber } from '@/frontend/lib/whatsapp'
+
 export default function Footer() {
+  const waNumber = getWaNumber()
   return (
     <footer className="bg-gray-900 text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -56,7 +59,7 @@ export default function Footer() {
               Order via WhatsApp untuk pemesanan
             </p>
             <a
-              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
+              href={`https://wa.me/${waNumber}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition text-sm"
