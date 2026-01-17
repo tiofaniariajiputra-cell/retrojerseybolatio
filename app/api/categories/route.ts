@@ -8,11 +8,12 @@ export async function GET(request: NextRequest) {
     })
 
     return NextResponse.json({ categories })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get categories error:', error)
-    if (error?.message?.includes("Can't reach database server") || error?.name === 'PrismaClientInitializationError') {
+    const err = error as Error & { name?: string }
+    if (err?.message?.includes("Can't reach database server") || err?.name === 'PrismaClientInitializationError') {
       return NextResponse.json({ categories: [] })
     }
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: err?.message ?? 'Unknown error' }, { status: 500 })
   }
 }
