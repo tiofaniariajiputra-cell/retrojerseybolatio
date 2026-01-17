@@ -5,6 +5,16 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import Link from 'next/link'
 
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const { user, loading, isAdmin } = useAuth()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
       router.push('/login')
     }
@@ -80,5 +90,3 @@ import Link from 'next/link'
     </div>
   )
 }
-
-// recovery: small tweak commit #2
