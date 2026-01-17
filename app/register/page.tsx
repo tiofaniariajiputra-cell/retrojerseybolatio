@@ -157,3 +157,5 @@ export default function RegisterPage() {
     </div>
   )
 }
+
+// recovery: page fix #1
