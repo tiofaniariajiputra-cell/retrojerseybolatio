@@ -7,7 +7,8 @@ import { useAuth } from '@/frontend/contexts/AuthContext'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { siseState('')
+  const { signIn } = useAuth()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -119,7 +120,3 @@ export default function LoginPage() {
     </div>
   )
 }
-
-// recovery: page fix #2
-
-// recovery: automated tweak commit #2
