@@ -1,5 +1,6 @@
 import { prisma } from '@/backend/utils/prisma'
 import net from 'net'
+import Link from 'next/link'
 
 async function isDbReachable(databaseUrl?: string, timeout = 1000) {
   if (!databaseUrl) return false
@@ -211,24 +212,24 @@ export default async function AdminDashboard() {
       <div className="mt-8 bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Aksi Cepat</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
+          <Link
             href="/admin/products/new"
             className="bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition text-center font-semibold"
           >
             Tambah Produk Baru
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/products"
             className="bg-gray-600 text-white px-6 py-4 rounded-lg hover:bg-gray-700 transition text-center font-semibold"
           >
             Kelola Produk
-          </a>
-          <a
+          </Link>
+          <Link
             href="/products"
             className="bg-green-600 text-white px-6 py-4 rounded-lg hover:bg-green-700 transition text-center font-semibold"
           >
             Lihat Katalog
-          </a>
+          </Link>
         </div>
       </div>
     </div>
