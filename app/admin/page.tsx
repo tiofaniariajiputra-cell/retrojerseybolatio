@@ -3,11 +3,7 @@ import net from 'net'
 import Link from 'next/link'
 import { Product as PrismaProduct, ProductSize, ProductImage } from '@prisma/client'
 
-async function isDbReachable(databaseUrl?: string, timeout = 1000) {
-  if (!databaseUrl) return false
-  try {
-    const url = new URL(databaseUrl)
-    const host = url.hostname
+async functhostname
     const port = Number(url.port) || 5432
 
     return await new Promise((resolve) => {
@@ -70,19 +66,7 @@ export default async function AdminDashboard() {
           },
           include: {
             category: true,
-            sizes: true,
-          },
-          take: 5,
-        }),
-        prisma.product.findMany({
-          include: {
-            category: true,
-            images: {
-              where: { isPrimary: true },
-              take: 1,
-            },
-          },
-          orderBy: { createdAt: 'desc' },
+            sizt: 'desc' },
           take: 5,
         }),
       ])
