@@ -35,7 +35,7 @@ async function isDbReachable(databaseUrl?: string, timeout = 1000) {
       })
       socket.connect(port, host)
     })
-  } catch (e) {
+  } catch {
     return false
   }
 }
@@ -95,7 +95,6 @@ export default async function AdminDashboard() {
       }, 0)
     } catch (err) {
       // Log the error but do not crash the page — show empty/default stats instead
-      // eslint-disable-next-line no-console
       console.error('AdminDashboard DB error:', err)
       totalProducts = 0
       totalCategories = 0
@@ -105,7 +104,6 @@ export default async function AdminDashboard() {
     }
   } else {
     // DB not reachable — skip queries and use defaults
-    // eslint-disable-next-line no-console
     console.warn('Database not reachable, skipping Prisma queries for admin dashboard')
   }
 
