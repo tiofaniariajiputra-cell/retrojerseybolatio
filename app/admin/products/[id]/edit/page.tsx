@@ -35,7 +35,26 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
     // Fetch product and categories
     Promise.all([
       fetch(`/api/admin/products/${id}`).then(res => res.json()),
-      fetch
+      fetch('/api/categories').then(res => res.json())
+    ]).then(([productData, categoriesData]) => {
+        setProduct(productData.product)
+        setCategories(categoriesData.categories || [])
+        setFetching(false)
+      })
+      .catch((err: unknown) => {
+        console.error('Failed to fetch:', err)
+        setError('Gagal memuat data produk')
+        setFetching(false)
+      })
+  }, [id])
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
       name: formData.get('name'),
       slug: formData.get('slug'),
       club: formData.get('club'),
