@@ -32,7 +32,7 @@ async function createAdmin() {
   try {
     console.log('🔄 Creating admin user...')
     
-    const { data, error } = await supabase.auth.admin.createUser({
+    const { error } = await supabase.auth.admin.createUser({
       email: 'admin@jerseyretro.com',
       password: 'admin123',
       email_confirm: true,
