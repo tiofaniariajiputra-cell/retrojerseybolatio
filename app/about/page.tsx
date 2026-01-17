@@ -1,4 +1,5 @@
 export default function AboutPage() {
+  const waNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx').replace(/\D/g, '')
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,7 +63,7 @@ export default function AboutPage() {
                 <div>
                   <p className="font-semibold text-gray-900 mb-2">WhatsApp</p>
                   <a
-                    href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
+                    href={`https://wa.me/${waNumber}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
@@ -161,7 +162,7 @@ export default function AboutPage() {
             Hubungi kami melalui WhatsApp untuk informasi lebih lanjut
           </p>
           <a
-            href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
+            href={`https://wa.me/${waNumber}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition font-semibold"
