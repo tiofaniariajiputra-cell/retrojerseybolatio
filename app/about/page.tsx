@@ -1,7 +1,7 @@
 import { getWaNumber } from '@/frontend/lib/whatsapp'
 
 export default function AboutPage() {
-  const waNumber = getWaNumber()
+  const waNumber = geter()
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -160,9 +160,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-bold mb-4">
             Punya Pertanyaan Lain?
           </h2>
-          <p className="text-blue-100 mb-6">
-            Hubungi kami melalui WhatsApp untuk informasi lebih lanjut
-          </p>
+          <p className
           <a
             href={`https://wa.me/${waNumber}`}
             target="_blank"
