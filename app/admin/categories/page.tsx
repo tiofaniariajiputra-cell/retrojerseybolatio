@@ -73,7 +73,7 @@ export default async function AdminCategoriesPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="text-sm text-gray-900">
-                        {category._count.products} produk
+                        {category._count?.products ?? 0} produk
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

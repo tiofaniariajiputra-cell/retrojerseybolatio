@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 
-type ImageType = { id: string; url: string; alt?: string; isPrimary?: boolean }
-type Size = { id: string; size: string; stock?: number }
+type ImageType = { id: string; url: string; alt?: string | null; isPrimary?: boolean }
+type Size = { id: string; size: string; id?: string; stock: number }
 
 interface Props {
   params: Promise<{
@@ -33,9 +33,9 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound()
   }
 
-  const primaryImage = product.images.find((img: ImageType) => img.isPrimary) || product.images[0]
-  const totalStock = product.sizes.reduce((sum: number, size: Size) => sum + (size.stock || 0), 0)
-  const availableSizes = product.sizes.filter((size: Size) => (size.stock || 0) > 0)
+  const primaryImage = product.images.find((img) => img.isPrimary) || product.images[0]
+  const totalStock = product.sizes.reduce((sum: number, size: Size) => sum + size.stock, 0)
+  const availableSizes = product.sizes.filter((size: Size) => size.stock > 0)
 
   const whatsappNumber = getWaNumber()
   const whatsappMessage = encodeURIComponent(
@@ -82,7 +82,7 @@ export default async function ProductDetailPage({ params }: Props) {
               {/* Thumbnail Images */}
               {product.images.length > 1 && (
                 <div className="grid grid-cols-4 gap-2">
-                  {product.images.map((image: ImageType) => (
+                  {product.images.map((image) => (
                     <div
                       key={image.id}
                       className="relative h-20 bg-gray-200 rounded-lg overflow-hidden cursor-pointer hover:opacity-75 transition"

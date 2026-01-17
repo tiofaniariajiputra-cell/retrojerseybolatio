@@ -6,8 +6,8 @@ import FilterToggle from './FilterToggle'
 import Image from 'next/image'
 import Link from 'next/link'
 
-type ImageType = { url: string; alt?: string }
-type Size = { id: string; size: string; stock?: number }
+type ImageType = { url: string; alt?: string | null }
+type Size = { id: string; size: string; stock: number }
 type Product = {
   id: string
   slug: string
