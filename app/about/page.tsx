@@ -177,3 +177,5 @@ export default function AboutPage() {
 }
 
 // recovery: small tweak commit #1
+
+// recovery: page fix #12
