@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { getWaNumber } from '@/frontend/lib/whatsapp'
 
 export default function Home() {
-  const waNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx').replace(/\D/g, '')
+  const waNumber = getWaNumber()
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
