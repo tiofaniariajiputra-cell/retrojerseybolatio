@@ -4,6 +4,12 @@ import Image from 'next/image'
 import { Product, ProductImage, ProductSize } from '@prisma/client'
 import DeleteProductButton from '@/frontend/components/DeleteProductButton'
 
+export default async function AdminProductsPage() {
+  const products = await prisma.product.findMany({
+    include: {
+      category: true,
+      images: {
+        where: { isPrimary: true },
         take: 1,
       },
       sizes: true,
@@ -141,7 +147,13 @@ import DeleteProductButton from '@/frontend/components/DeleteProductButton'
                           <DeleteProductButton 
                             productId={product.id} 
                             productName={product.name}
-       
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
             </table>
           </div>
         </div>
@@ -149,7 +161,3 @@ import DeleteProductButton from '@/frontend/components/DeleteProductButton'
     </div>
   )
 }
-
-// recovery: small tweak commit #5
-
-// recovery: page fix #8
