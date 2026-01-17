@@ -33,7 +33,7 @@ export default async function ProductDetailPage({ params }: Props) {
   const totalStock = product.sizes.reduce((sum: number, size: any) => sum + size.stock, 0)
   const availableSizes = product.sizes.filter((size: any) => size.stock > 0)
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx'
+  const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx').replace(/\D/g, '')
   const whatsappMessage = encodeURIComponent(
     `Halo, saya tertarik dengan jersey:\n\n` +
     `Produk: ${product.name}\n` +
