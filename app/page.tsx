@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { getWaNumber } from '@/frontend/lib/whatsapp'
-ay-50">
+
+export default function Home() {
+  const waNumber = getWaNumber()
+  return (
+    <div className="bg-gray-50">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -205,5 +209,3 @@ ay-50">
     </div>
   );
 }
-
-// recovery: page fix #3
