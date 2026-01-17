@@ -1,10 +1,10 @@
 // Example API route handler
 // Place your Next.js API routes in app/api/ directory
 
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { prisma } from '@/backend/utils/prisma'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Example: Fetch users from database
     const users = await prisma.user.findMany()

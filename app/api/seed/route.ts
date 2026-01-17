@@ -1,8 +1,7 @@
 // API route untuk seed database
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { prisma } from '@/backend/utils/prisma'
-
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Clear existing data
     await prisma.productSize.deleteMany()
