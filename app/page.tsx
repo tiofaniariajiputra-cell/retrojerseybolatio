@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export default function Home() {
+  const waNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx').replace(/\D/g, '')
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
@@ -21,7 +22,7 @@ export default function Home() {
                 Lihat Koleksi
               </Link>
               <a
-                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx'}`}
+                href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center"
@@ -100,7 +101,7 @@ export default function Home() {
             Hubungi kami sekarang via WhatsApp untuk konsultasi dan pemesanan
           </p>
           <a
-            href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx'}`}
+            href={`https://wa.me/${waNumber}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition text-lg"
