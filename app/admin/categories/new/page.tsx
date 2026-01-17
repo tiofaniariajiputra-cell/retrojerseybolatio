@@ -117,3 +117,5 @@ export default function NewCategoryPage() {
     </div>
   )
 }
+
+// recovery: page fix #10
