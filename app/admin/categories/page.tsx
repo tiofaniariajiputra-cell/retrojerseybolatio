@@ -59,7 +59,7 @@ export default async function AdminCategoriesPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {categories.map((category: any) => (
+                {categories.map((category: { id: string; name: string; slug?: string; _count?: { products?: number } }) => (
                   <tr key={category.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
