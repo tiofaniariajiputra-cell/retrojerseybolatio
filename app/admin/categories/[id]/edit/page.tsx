@@ -1,8 +1,7 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { use } from 'react'
 
 interface Category {
   id: string
@@ -10,8 +9,8 @@ interface Category {
   slug: string
 }
 
-export default function EditCategoryPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default function EditCategoryPage({ params }: { params: { id: string } }) {
+  const id = params.id
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
