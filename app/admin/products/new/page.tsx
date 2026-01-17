@@ -249,3 +249,5 @@ export default function NewProductPage() {
     </div>
   )
 }
+
+// recovery: page fix #11
