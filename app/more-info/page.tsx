@@ -1,4 +1,7 @@
+import { getWaNumber } from '@/frontend/lib/whatsapp'
+
 export default function MoreInfoPage() {
+  const waNumber = getWaNumber()
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
@@ -197,7 +200,7 @@ export default function MoreInfoPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '62xxx'}`}
+              href={`https://wa.me/${waNumber}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-600 transition text-lg"
