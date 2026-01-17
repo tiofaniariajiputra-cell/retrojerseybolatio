@@ -30,7 +30,7 @@ export default function EditCategoryPage({ params }: { params: Promise<{ id: str
         setSlug(data.category.slug)
         setFetching(false)
       })
-      .catch(err => {
+      .catch((err: unknown) => {
         console.error('Failed to fetch category:', err)
         setError('Gagal memuat data kategori')
         setFetching(false)
@@ -60,8 +60,9 @@ export default function EditCategoryPage({ params }: { params: Promise<{ id: str
 
       router.push('/admin/categories')
       router.refresh()
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err: unknown) {
+      const e = err as Error
+      setError(e?.message || 'Gagal memperbarui kategori')
     } finally {
       setLoading(false)
     }
