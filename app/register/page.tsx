@@ -40,8 +40,9 @@ export default function RegisterPage() {
       setTimeout(() => {
         router.push('/login')
       }, 2000)
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign up')
+    } catch (err: unknown) {
+      const e = err as Error
+      setError(e?.message || 'Failed to sign up')
     } finally {
       setLoading(false)
     }
