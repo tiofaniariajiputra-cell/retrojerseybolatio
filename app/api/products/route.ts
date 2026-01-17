@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/backend/utils/prisma'
+import { Prisma } from '@prisma/client'
 
 export async function GET(request: NextRequest) {
   try {
@@ -7,9 +8,8 @@ export async function GET(request: NextRequest) {
     const search = url.searchParams.get('search') || undefined
     const category = url.searchParams.get('category') || undefined
 
-    // allow building a dynamic where object for Prisma query
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const where: any = { isAvailable: true }
+    // build a dynamic where object for Prisma query
+    const where: Prisma.ProductWhereInput = { isAvailable: true }
 
     if (category) {
       where.category = { slug: category }
