@@ -14,9 +14,10 @@ export async function DELETE(
     })
 
     return NextResponse.json({ message: 'Product deleted successfully' })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Delete product error:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
@@ -41,9 +42,10 @@ export async function GET(
     }
 
     return NextResponse.json({ product })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get product error:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
@@ -102,8 +104,9 @@ export async function PUT(
     }
 
     return NextResponse.json({ product })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Update product error:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
