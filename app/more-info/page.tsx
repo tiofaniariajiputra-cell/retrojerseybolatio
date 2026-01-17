@@ -1,11 +1,12 @@
 import { getWaNumber } from '@/frontend/lib/whatsapp'
-
-export default function MoreInfoPage() {
-  const waNumber = getWaNumber()
-  return (
-    <div className="bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+import Link from 'next/link'
+            <Link
+              href="/products"
+              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition"
+            >
+              <span>🛍️</span>
+              <span>Lihat Koleksi</span>
+            </Link>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
