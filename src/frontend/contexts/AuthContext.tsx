@@ -19,6 +19,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
+  const checkAdminRole = async (user: User | null) => {
+    if (!user) {
+      setIsAdmin(false)
+      return
+    }
+
+    // Check if user has admin role in user_metadata or app_metadata
+    const role = user.user_metadata?.role || user.app_metadata?.role
+    setIsAdmin(role === 'admin')
+  }
 
   useEffect(() => {
     // Check active session
@@ -37,17 +47,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return () => subscription.unsubscribe()
   }, [])
-
-  const checkAdminRole = async (user: User | null) => {
-    if (!user) {
-      setIsAdmin(false)
-      return
-    }
-
-    // Check if user has admin role in user_metadata or app_metadata
-    const role = user.user_metadata?.role || user.app_metadata?.role
-    setIsAdmin(role === 'admin')
-  }
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
