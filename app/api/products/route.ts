@@ -7,6 +7,8 @@ export async function GET(request: NextRequest) {
     const search = url.searchParams.get('search') || undefined
     const category = url.searchParams.get('category') || undefined
 
+    // allow building a dynamic where object for Prisma query
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: any = { isAvailable: true }
 
     if (category) {
@@ -32,12 +34,13 @@ export async function GET(request: NextRequest) {
     })
 
     return NextResponse.json({ products })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get products error:', error)
+    const err = error as Error & { name?: string }
     // If DB is unreachable during development, return empty list instead of 500
-    if (error?.message?.includes("Can't reach database server") || error?.name === 'PrismaClientInitializationError') {
+    if (err?.message?.includes("Can't reach database server") || err?.name === 'PrismaClientInitializationError') {
       return NextResponse.json({ products: [] })
     }
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: err?.message ?? 'Unknown error' }, { status: 500 })
   }
 }
