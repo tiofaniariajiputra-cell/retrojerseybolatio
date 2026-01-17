@@ -1,6 +1,7 @@
 import { prisma } from '@/backend/utils/prisma'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Product, ProductImage, ProductSize } from '@prisma/client'
 import DeleteProductButton from '@/frontend/components/DeleteProductButton'
 
 export default async function AdminProductsPage() {
@@ -69,9 +70,9 @@ export default async function AdminProductsPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {products.map((product: any) => {
+                {products.map((product: Product & { images: ProductImage[]; sizes: ProductSize[]; category: { name: string } }) => {
                   const primaryImage = product.images[0]
-                  const totalStock = product.sizes.reduce((sum: number, size: any) => sum + size.stock, 0)
+                  const totalStock = product.sizes.reduce((sum: number, size: ProductSize) => sum + size.stock, 0)
                   
                   return (
                     <tr key={product.id} className="hover:bg-gray-50">
