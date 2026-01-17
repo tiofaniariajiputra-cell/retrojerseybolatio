@@ -6,3 +6,5 @@ export function buildWaLink(message?: string, envValue?: string) {
   if (!message) return `https://wa.me/${num}`
   return `https://wa.me/${num}?text=${encodeURIComponent(message)}`
 }
+
+// recovery: small tweak commit #8
