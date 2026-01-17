@@ -20,13 +20,17 @@ export default function LoginPage() {
     setError('')
 
     try {
-      await signIn(email, password)
-      // Wait a bit for auth state to update
-      await new Promise(resolve => setTimeout(resolve, 500))
-      router.push('/')
-      router.refresh()
+      const result = await signIn(email, password)
+      if (result?.error) {
+        setError(result.error || 'Email atau password salah')
+      } else {
+        // Wait a bit for auth state to update
+        await new Promise(resolve => setTimeout(resolve, 500))
+        router.push('/')
+        router.refresh()
+      }
     } catch (err: unknown) {
-      console.error('Login error:', err)
+      console.error('Login unexpected error:', err)
       const e = err as Error
       setError(e?.message || 'Email atau password salah')
     } finally {

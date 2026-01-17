@@ -7,7 +7,7 @@ import { supabase } from '@/frontend/lib/supabase-client'
 interface AuthContextType {
   user: User | null
   loading: boolean
-  signIn: (email: string, password: string) => Promise<void>
+  signIn: (email: string, password: string) => Promise<{ error?: string }>
   signUp: (email: string, password: string, name: string) => Promise<void>
   signOut: () => Promise<void>
   isAdmin: boolean
@@ -49,8 +49,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) throw error
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) {
+        return { error: error.message }
+      }
+
+      // Update local user state when login succeeds
+      setUser(data.session?.user ?? null)
+      return {}
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err)
+      return { error: message }
+    }
   }
 
   const signUp = async (email: string, password: string, name: string) => {
