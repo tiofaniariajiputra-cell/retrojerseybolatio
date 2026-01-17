@@ -1,12 +1,24 @@
 "use client"
 
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import FilterToggle from './FilterToggle'
 import Image from 'next/image'
 import Link from 'next/link'
 
-type Product = any
+type ImageType = { url: string; alt?: string }
+type Size = { id: string; size: string; stock?: number }
+type Product = {
+  id: string
+  slug: string
+  name: string
+  images?: ImageType[]
+  sizes?: Size[]
+  price?: number
+  club?: string
+  season?: string
+  category?: { name?: string }
+}
 type Category = { id: string; name: string; slug: string }
 
 function useDebounced<T>(value: T, delay = 300) {
@@ -38,20 +50,33 @@ export default function ProductsClient() {
   useEffect(() => {
     // sync category from URL search params
     const q = searchParams?.get('category') || null
-    setCategory(q)
+    setCategory((prev) => (prev !== q ? q : prev))
   }, [searchParams])
 
   useEffect(() => {
+    let mounted = true
     const params = new URLSearchParams()
     if (category) params.set('category', category)
     if (debouncedSearch) params.set('search', debouncedSearch)
 
-    setLoading(true)
-    fetch('/api/products?' + params.toString())
-      .then((r) => r.json())
-      .then((data) => setProducts(data.products || []))
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false))
+    const fetchProducts = async () => {
+      try {
+        if (mounted) setLoading(true)
+        const r = await fetch('/api/products?' + params.toString())
+        const data = await r.json()
+        if (!mounted) return
+        setProducts(data.products || [])
+      } catch (err) {
+        console.error(err)
+      } finally {
+        if (mounted) setLoading(false)
+      }
+    }
+
+    fetchProducts()
+    return () => {
+      mounted = false
+    }
   }, [category, debouncedSearch])
 
   const total = products.length
@@ -93,7 +118,7 @@ export default function ProductsClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product: Product) => {
               const primaryImage = product.images?.[0]
-              const totalStock = (product.sizes || []).reduce((sum: number, size: any) => sum + (size.stock || 0), 0)
+              const totalStock = (product.sizes || []).reduce((sum: number, size: Size) => sum + (size.stock || 0), 0)
 
               return (
                 <Link
@@ -145,8 +170,8 @@ export default function ProductsClient() {
                       <p className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Ukuran Tersedia</p>
                       <div className="flex flex-wrap gap-1.5">
                         {(product.sizes || [])
-                          .sort((a: any, b: any) => ['S', 'M', 'L', 'XL', 'XXL'].indexOf(a.size) - ['S', 'M', 'L', 'XL', 'XXL'].indexOf(b.size))
-                          .map((size: any) => (
+                          .sort((a: Size, b: Size) => ['S', 'M', 'L', 'XL', 'XXL'].indexOf(a.size) - ['S', 'M', 'L', 'XL', 'XXL'].indexOf(b.size))
+                          .map((size: Size) => (
                             <span key={size.id} className={`text-xs font-bold px-3 py-1.5 rounded-lg border-2 transition ${size.stock > 0 ? 'bg-green-50 border-green-500 text-green-700' : 'bg-gray-50 border-gray-300 text-gray-400 line-through'}`}>{size.size}</span>
                           ))}
                       </div>
