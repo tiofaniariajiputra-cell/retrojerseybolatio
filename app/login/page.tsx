@@ -25,9 +25,10 @@ export default function LoginPage() {
       await new Promise(resolve => setTimeout(resolve, 500))
       router.push('/')
       router.refresh()
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Login error:', err)
-      setError(err.message || 'Email atau password salah')
+      const e = err as Error
+      setError(e?.message || 'Email atau password salah')
     } finally {
       setLoading(false)
     }
