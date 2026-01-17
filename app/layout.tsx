@@ -9,7 +9,15 @@ const geistSans = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-ap dengan koleksi jersey klasik dari berbagai klub dan era",
+
+const geistMono = Roboto_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Jersey Bola Retro - Koleksi Jersey Klasik",
+  description: "Toko jersey retro terlengkap dengan koleksi jersey klasik dari berbagai klub dan era",
 };
 
 export default function RootLayout({
