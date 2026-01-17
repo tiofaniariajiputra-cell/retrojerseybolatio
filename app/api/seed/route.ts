@@ -83,8 +83,9 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ message: 'Database seeded successfully!', count: products.length })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Seed error:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
