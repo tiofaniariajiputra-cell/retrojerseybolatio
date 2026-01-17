@@ -149,7 +149,7 @@ export default function ProductsClient() {
                   <div className="p-5">
                     <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition min-h-[3.5rem]">{product.name}</h3>
 
-                    <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-black mb-4">
                       <span className="font-medium">{product.club}</span>
                       <span className="text-gray-400">•</span>
                       <span>{product.season}</span>
@@ -157,11 +157,11 @@ export default function ProductsClient() {
 
                     <div className="flex items-end justify-between mb-4 pb-4 border-b border-gray-100">
                       <div>
-                        <p className="text-xs text-gray-500 mb-1">Harga</p>
+                        <p className="text-xs text-black mb-1">Harga</p>
                         <p className="text-2xl font-extrabold text-blue-600">Rp {Number(product.price).toLocaleString('id-ID')}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-xs text-gray-500 mb-1">Stok</p>
+                        <p className="text-xs text-black mb-1">Stok</p>
                         <p className={`text-lg font-bold ${totalStock > 0 ? 'text-green-600' : 'text-red-600'}`}>{totalStock}</p>
                       </div>
                     </div>
