@@ -1,15 +1,15 @@
-const { createClient } = require('@supabase/supabase-js')
-const fs = require('fs')
-const path = require('path')
+import { createClient } from '@supabase/supabase-js'
+import { readFileSync } from 'fs'
+import path from 'path'
 
 // Read .env file manually
-const envPath = path.join(__dirname, '..', '.env')
-const envContent = fs.readFileSync(envPath, 'utf-8')
+const envPath = path.join(new URL(import.meta.url).pathname, '..', '..', '.env')
+const envContent = readFileSync(envPath, 'utf-8')
 const envVars = {}
 envContent.split('\n').forEach(line => {
   const [key, ...valueParts] = line.split('=')
   if (key && valueParts.length) {
-    envVars[key.trim()] = valueParts.join('=').trim().replace(/^["']|["']$/g, '')
+    envVars[key.trim()] = valueParts.join('=').trim().replace(/^['"]|['"]$/g, '')
   }
 })
 
@@ -53,7 +53,7 @@ async function createAdmin() {
     console.log('👤 Role: admin')
     console.log('\n🎉 You can now login with these credentials!')
   } catch (err) {
-    console.error('❌ Unexpected error:', err.message)
+    console.error('❌ Unexpected error:', err)
     process.exit(1)
   }
 }
