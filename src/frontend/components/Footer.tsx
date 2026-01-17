@@ -1,5 +1,7 @@
 import { getWaNumber } from '@/frontend/lib/whatsapp'
 
+import Link from 'next/link'
+
 export default function Footer() {
   const waNumber = getWaNumber()
   return (
@@ -19,19 +21,19 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4">Link Cepat</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="/" className="text-gray-400 hover:text-white transition">
+                <Link href="/" className="text-gray-400 hover:text-white transition">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/products" className="text-gray-400 hover:text-white transition">
+                <Link href="/products" className="text-gray-400 hover:text-white transition">
                   Produk
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/more-info" className="text-gray-400 hover:text-white transition">
+                <Link href="/more-info" className="text-gray-400 hover:text-white transition">
                   More Info
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
