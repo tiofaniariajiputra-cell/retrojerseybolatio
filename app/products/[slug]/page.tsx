@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 type ImageType = { id: string; url: string; alt?: string | null; isPrimary?: boolean }
-type Size = { id: string; size: string; id?: string; stock: number }
+type Size = { id: string; size: string; stock: number }
 
 interface Props {
   params: Promise<{
