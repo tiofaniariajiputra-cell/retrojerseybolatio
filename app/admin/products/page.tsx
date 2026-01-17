@@ -151,3 +151,5 @@ import DeleteProductButton from '@/frontend/components/DeleteProductButton'
 }
 
 // recovery: small tweak commit #5
+
+// recovery: page fix #8
