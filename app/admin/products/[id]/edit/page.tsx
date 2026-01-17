@@ -1,8 +1,7 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { use } from 'react'
 
 interface Category {
   id: string
@@ -23,9 +22,8 @@ interface Product {
   images: { url: string }[]
   sizes: { size: string; stock: number }[]
 }
-
-export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default function EditProductPage({ params }: { params: { id: string } }) {
+  const id = params.id
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
@@ -38,13 +36,12 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
     Promise.all([
       fetch(`/api/admin/products/${id}`).then(res => res.json()),
       fetch('/api/categories').then(res => res.json())
-    ])
-      .then(([productData, categoriesData]) => {
+    ]).then(([productData, categoriesData]) => {
         setProduct(productData.product)
         setCategories(categoriesData.categories || [])
         setFetching(false)
       })
-      .catch(err => {
+      .catch((err: unknown) => {
         console.error('Failed to fetch:', err)
         setError('Gagal memuat data produk')
         setFetching(false)
@@ -90,8 +87,9 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
 
       router.push('/admin/products')
       router.refresh()
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err: unknown) {
+      if (err instanceof Error) setError(err.message)
+      else setError(String(err))
     } finally {
       setLoading(false)
     }
