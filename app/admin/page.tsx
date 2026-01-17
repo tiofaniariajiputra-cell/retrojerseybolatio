@@ -168,8 +168,8 @@ export default async function AdminDashboard() {
             <p className="text-gray-500 text-center py-8">Tidak ada produk dengan stok rendah</p>
           ) : (
             <div className="space-y-3">
-              {lowStockProducts.map((product: any) => {
-                const totalStock = product.sizes.reduce((sum: number, size: any) => sum + size.stock, 0)
+              {lowStockProducts.map((product: ProductWithSizes) => {
+                const totalStock = product.sizes.reduce((sum: number, size: ProductSize) => sum + size.stock, 0)
                 return (
                   <div key={product.id} className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
                     <div>
@@ -194,7 +194,7 @@ export default async function AdminDashboard() {
             <p className="text-gray-500 text-center py-8">Belum ada produk</p>
           ) : (
             <div className="space-y-3">
-              {recentProducts.map((product: any) => (
+              {recentProducts.map((product: ProductWithImages) => (
                 <div key={product.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div>
                     <p className="font-semibold text-gray-900">{product.name}</p>
