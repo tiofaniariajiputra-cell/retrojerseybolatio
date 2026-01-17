@@ -173,7 +173,7 @@ export default function MoreInfoPage() {
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               </div>
               <h3 className="font-bold text-gray-900 mb-2 text-lg">Lokasi</h3>
-              <p className="text-gray-600">Jakarta, Indonesia</p>
+              <p className="text-gray-600">Bandar Lampung, Lampung, Indonesia</p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-md text-center">
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">

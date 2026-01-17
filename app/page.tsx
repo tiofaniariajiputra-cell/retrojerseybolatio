@@ -126,7 +126,7 @@ export default function Home() {
                 &quot;Jersey yang diterima sesuai ekspektasi! Kualitas bagus dan pengiriman cepat. Sangat puas!&quot;
               </p>
               <p className="font-semibold text-gray-900">- Budi</p>
-              <p className="text-sm text-gray-500">Jakarta</p>
+              <p className="text-sm text-gray-500">Bandar Lampung, Lampung</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">

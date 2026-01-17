@@ -42,7 +42,7 @@ export default function AboutPage() {
               <div className="flex items-start gap-3">
                 <div>
                   <p className="font-semibold text-gray-900">Alamat</p>
-                  <p className="text-gray-600">Jakarta, Indonesia</p>
+                  <p className="text-gray-600">Bandar Lampung, Lampung, Indonesia</p>
                 </div>
               </div>
 
