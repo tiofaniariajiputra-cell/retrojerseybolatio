@@ -24,13 +24,7 @@ export default async function ProductDetailPage({ params }: Props) {
         orderBy: { order: 'asc' },
       },
       sizes: {
-        orderBy: { size: 'asc' },
-      },
-    },
-  })
-
-  if (!product) {
-    notFound()
+        orderB
   }
 
   const primaryImage = product.images.find((img) => img.isPrimary) || product.images[0]
@@ -50,12 +44,7 @@ export default async function ProductDetailPage({ params }: Props) {
     <div className="bg-gray-50 min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <div className="mb-6 flex items-center gap-2 text-sm text-gray-600">
-          <Link href="/" className="hover:text-blue-600">Home</Link>
-          <span>/</span>
-          <Link href="/products" className="hover:text-blue-600">Produk</Link>
-          <span>/</span>
-          <span className="text-gray-900">{product.name}</span>
+        <div classay-900">{product.name}</span>
         </div>
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -198,9 +187,5 @@ export default async function ProductDetailPage({ params }: Props) {
             <Link href="/products" className="text-blue-600 hover:underline">
               Lihat semua produk →
             </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+          </
 }
