@@ -39,8 +39,12 @@ export default function NewCategoryPage() {
 
       router.push('/admin/categories')
       router.refresh()
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError(String(err))
+      }
     } finally {
       setLoading(false)
     }
