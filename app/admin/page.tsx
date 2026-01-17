@@ -1,6 +1,7 @@
 import { prisma } from '@/backend/utils/prisma'
 import net from 'net'
 import Link from 'next/link'
+import { Product as PrismaProduct, ProductSize, ProductImage } from '@prisma/client'
 
 async function isDbReachable(databaseUrl?: string, timeout = 1000) {
   if (!databaseUrl) return false
@@ -43,8 +44,11 @@ export default async function AdminDashboard() {
   // Get statistics with graceful handling when the DB is unreachable
   let totalProducts = 0
   let totalCategories = 0
-  let lowStockProducts: any[] = []
-  let recentProducts: any[] = []
+  type ProductWithSizes = PrismaProduct & { sizes: ProductSize[]; category: { name: string } }
+  type ProductWithImages = PrismaProduct & { images: ProductImage[]; category: { name: string } }
+
+  let lowStockProducts: ProductWithSizes[] = []
+  let recentProducts: ProductWithImages[] = []
   let totalStock = 0
 
   const reachable = await isDbReachable(process.env.DATABASE_URL)
@@ -86,8 +90,8 @@ export default async function AdminDashboard() {
       const allProducts = await prisma.product.findMany({
         include: { sizes: true },
       })
-      totalStock = allProducts.reduce((sum: number, product: any) => {
-        return sum + product.sizes.reduce((pSum: number, size: any) => pSum + size.stock, 0)
+      totalStock = allProducts.reduce((sum: number, product: { sizes: ProductSize[] }) => {
+        return sum + product.sizes.reduce((pSum: number, size: ProductSize) => pSum + size.stock, 0)
       }, 0)
     } catch (err) {
       // Log the error but do not crash the page — show empty/default stats instead
