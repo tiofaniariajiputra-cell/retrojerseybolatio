@@ -119,3 +119,5 @@ export default function LoginPage() {
     </div>
   )
 }
+
+// recovery: page fix #2
