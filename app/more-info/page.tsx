@@ -210,13 +210,13 @@ export default function MoreInfoPage() {
               <span>💬</span>
               <span>Chat WhatsApp</span>
             </a>
-            <a
+            <Link
               href="/products"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition text-lg"
             >
               <span>🛍️</span>
               <span>Lihat Koleksi</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
